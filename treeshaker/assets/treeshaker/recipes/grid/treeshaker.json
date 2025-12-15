@@ -1,0 +1,50 @@
+{
+  "ingredientPattern": "MH_,GPT,SLK",
+  "width": 3,
+  "height": 3,
+  "ingredients": {
+    "G": {
+      "type": "block",
+      "code": "game:metal-parts",
+      "quantity": 4
+    },
+    "H": {
+      "type": "item",
+      "code": "treeshaker:shakerhead-*",
+      "name": "metal",
+      "allowedVariants": [ "copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ]
+    },
+    "K": {
+      "type": "item",
+      "code": "game:knife-*",
+      "isTool": true
+    },
+    "L": {
+      "type": "block",
+      "code": "game:log-placed-*"
+    },
+    "M": {
+      "type": "item",
+      "code": "game:hammer-*",
+      "isTool": true
+    },
+    "P": {
+      "type": "item",
+      "code": "treeshaker:shakermotor"
+    },
+    "S": {
+      "type": "item",
+      "code": "game:saw-*",
+      "isTool": true
+    },
+    "T": {
+      "type": "item",
+      "code": "game:gear-temporal"
+    }
+  },
+  "output": {
+    "type": "item",
+    "code": "treeshaker:treeshaker-{metal}",
+    "quantity": 1
+  }
+}

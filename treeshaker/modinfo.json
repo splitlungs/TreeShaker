@@ -1,0 +1,11 @@
+{
+  "type": "code",
+  "modid": "treeshaker",
+  "name": "Tree Shaker",
+  "authors": [ "BloodThunder" ],
+  "description": "Tired of manually collecting fruit? Work smarter, not harder with Tree Shaker to collect fruit!",
+  "version": "1.0.0",
+  "dependencies": {
+    "game": ""
+  }
+}

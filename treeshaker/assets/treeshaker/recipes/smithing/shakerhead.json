@@ -1,0 +1,12 @@
+{
+	"ingredient": { "type": "item", "code": "game:ingot-*", "name": "metal", "allowedVariants": [ "copper", "tinbronze", "bismuthbronze", "blackbronze", "iron", "meteoriciron", "steel" ] },
+	"pattern": [
+		[
+			"__#######______",
+			"__##___________",
+			"__#######______"
+		]
+	],
+	"name": "Tree Shaker Head",
+	"output": { "type": "item", "code": "treeshaker:shakerhead-{metal}" }
+}

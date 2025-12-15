@@ -1,0 +1,142 @@
+[
+	{
+    	"op": "add",
+    	"path": "/client/animations/-",
+    	"value": {
+    	  "code": "treeshaker-harvest1",
+    	  "animation": "treeshaker-harvest1",
+    	  "blendMode": "Add",
+    	  "elementWeight": {
+    	    "UpperArmR": 4,
+    	    "LowerArmR": 4,
+			"UpperArmL": 4,
+    	    "LowerArmL": 4
+    	  },
+    	  "elementBlendMode": {
+    	    "UpperArmR": "AddAverage",
+    	    "LowerArmR": "AddAverage",
+			"UpperArmL": "AddAverage",
+    	    "LowerArmL": "AddAverage"
+    	  }
+    	},
+    	"side": "server",
+    	"file": "game:entities/humanoid/player.json"
+    },
+	{
+    	"op": "add",
+    	"path": "/client/animations/-",
+    	"value": {
+    	  "code": "treeshaker-harvest1-fp",
+    	  "animation": "treeshaker-harvest1-fp",
+    	  "blendMode": "Add",
+    	  "elementWeight": {
+    	    "UpperArmR": 4,
+    	    "LowerArmR": 4,
+			"UpperArmL": 4,
+    	    "LowerArmL": 4
+    	  },
+    	  "elementBlendMode": {
+    	    "UpperArmR": "AddAverage",
+    	    "LowerArmR": "AddAverage",
+			"UpperArmL": "AddAverage",
+    	    "LowerArmL": "AddAverage"
+    	  }
+    	},
+    	"side": "server",
+    	"file": "game:entities/humanoid/player.json"
+    },
+    {
+        "op": "add",
+        "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+        "path": "/animations/-",
+        "value": {
+  	  		"name": "TreeShaker-Harvest1",
+			"code": "treeshaker-harvest1",
+			"quantityframes": 6,
+			"onActivityStopped": "EaseOut",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": 0.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "offsetX": 0.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -17.0, "rotationY": 17.0, "rotationZ": -94.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -28.0, "rotationZ": -36.0 },
+						"UpperArmL": { "offsetX": 0.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 }
+					}
+				},
+				{
+					"frame": 3,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": 0.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "rotationX": -17.0, "rotationY": 10.0, "rotationZ": -94.0 },
+						"UpperArmL": { "offsetX": 0.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -38.0, "rotationZ": -36.0 }
+					}
+				},
+				{
+					"frame": 5,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": 0.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "rotationX": -17.0, "rotationY": 27.0, "rotationZ": -94.0 },
+						"UpperArmL": { "offsetX": 0.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -18.0, "rotationZ": -36.0 }
+					}
+				}
+			]
+  		}
+    },
+	{
+        "op": "add",
+        "file": "game:shapes/entity/humanoid/seraph-faceless.json",
+        "path": "/animations/-",
+        "value": {
+  	  		"name": "TreeShaker-Harvest1-fp",
+			"code": "treeshaker-harvest1-fp",
+			"quantityframes": 6,
+			"onActivityStopped": "EaseOut",
+			"onAnimationEnd": "Repeat",
+			"keyframes": [
+				{
+					"frame": 0,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": -3.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "offsetX": 3.0, "offsetY": 0.0, "offsetZ": 0.0, "rotationX": -17.0, "rotationY": 17.0, "rotationZ": -94.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -28.0, "rotationZ": -36.0 },
+						"UpperArmL": { "offsetX": 0.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 }
+					}
+				},
+				{
+					"frame": 3,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": -3.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "rotationX": -17.0, "rotationY": 10.0, "rotationZ": -94.0 },
+						"UpperArmL": { "offsetX": 3.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -38.0, "rotationZ": -36.0 }
+					}
+				},
+				{
+					"frame": 5,
+					"elements": {
+						"LowerTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 0.0 },
+						"UpperTorso": { "rotationX": 0.0, "rotationY": 0.0, "rotationZ": 4.0 },
+						"UpperArmR": { "offsetX": -3.0, "offsetY": -0.4, "offsetZ": 0.0, "rotationX": 14.0, "rotationY": 3.0, "rotationZ": 8.0 },
+						"LowerArmR": { "rotationX": -17.0, "rotationY": 27.0, "rotationZ": -94.0 },
+						"UpperArmL": { "offsetX": 3.0, "offsetY": -0.8, "offsetZ": 0.1, "rotationX": -8.0, "rotationY": -6.0, "rotationZ": -44.0 },
+						"LowerArmL": { "rotationX": 36.0, "rotationY": -18.0, "rotationZ": -36.0 }
+					}
+				}
+			]
+  		}
+    }
+]

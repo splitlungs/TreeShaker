@@ -1,0 +1,171 @@
+{
+  "code": "treeshaker",
+  "__comment": "Work smarter, not harder! Gather fruit by interacting with fruit trees.",
+  "class": "TreeShakerItem",
+  "damagedby": [ "blockbreaking", "attacking" ],
+  "attributes": {
+    "handbook": {
+      "groupBy": [ "treeshaker-*" ]
+    },
+    "toolrackTransformByType": {
+      "*": {
+        "translation": {
+          "x": -0.3,
+          "y": 0.6,
+          "z": -0.1
+        },
+        "rotation": {
+          "x": 97,
+          "y": 180,
+          "z": 3
+        },
+        "origin": {
+          "x": 0.5,
+          "y": 0,
+          "z": 0.5
+        },
+        "scale": 1.8
+      }
+    },
+    "groundStorageTransform": {
+			"translation": { "x": 0, "y": 0.5, "z": -0.3 },
+			"rotation": { "x": -180, "y": -90, "z": -115 },
+			"scale": 0.61
+		}
+  },
+  "behaviors": [
+    {
+      "name": "GroundStorable",
+      "properties": {
+        "layout": "WallHalves",
+        "wallOffY": 1,
+        "sprintKey": true,
+        "selectionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 1,
+          "y2": 0.1,
+          "z2": 1
+        },
+        "collisionBox": {
+          "x1": 0,
+          "y1": 0,
+          "z1": 0,
+          "x2": 0,
+          "y2": 0,
+          "z2": 0
+        }
+      }
+    },
+    { "name": "AnimationAuthoritative" }
+  ],
+  "variantgroups": [
+    {
+      "code": "metal",
+      "states": [
+        "copper",
+        "tinbronze",
+        "bismuthbronze",
+        "blackbronze",
+        "iron",
+        "meteoriciron",
+        "steel"
+      ]
+    }
+  ],
+  "texturesByType": {
+    "*": { "metal": { "base": "game:block/metal/ingot/{metal}" } }
+  },
+  "shapeByType": {
+    "*": { "base": "treeshaker:item/treeshaker" }
+  },
+  "heldTpHitAnimation": "treeshaker-harvest1",
+  "heldTpUseAnimation": "treeshaker-harvest1",
+  "durabilitybytype": {
+    "treeshaker-copper": 200,
+    "treeshaker-tinbronze": 500,
+    "treeshaker-bismuthbronze": 500,
+    "treeshaker-blackbronze": 900,
+    "treeshaker-iron": 1000,
+    "treeshaker-meteoriciron": 1500,
+    "treeshaker-steel": 2000
+  },
+  "miningspeedbytype": {
+    "*": {
+      "plant": 2
+    }
+  },
+  "attackpowerbytype": {
+    "*": 3.5
+  },
+  "attackRange": 2,
+	"tooltierbytype": {
+		"*-copper": 2,
+		"*-bismuthbronze": 3,
+		"*-tinbronze": 3,
+		"*-blackbronze": 3,
+		"*-iron": 4,
+		"*-meteoriciron": 4,
+		"*-steel": 5
+	},
+  "creativeinventory": {
+    "general": [ "*" ],
+    "items": [ "*" ],
+    "tools": [ "*" ]
+  },
+  "fpHandTransformByType": {
+    "*": {
+      "translation": {
+        "x": 0.2,
+        "y": 0.1,
+        "z": 0.5
+      },
+      "rotation": {
+        "x": 140,
+        "y": 93,
+        "z": -75
+      },
+      "scale": 2.5
+    }
+  },
+	"guiTransform": {
+		"translation": { "x": -14, "y": 7, "z": 0 },
+		"rotation": { "x": -147, "y": 0, "z": 50 },
+		"origin": { "x": 0.48, "y": 0.1, "z": 0.5 },
+		"scale": 0.75
+	},
+  "groundTransform": {
+    "translation": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "rotation": {
+      "x": -90,
+      "y": 0,
+      "z": 0
+    },
+    "origin": {
+      "x": 0.5,
+      "y": 0.5,
+      "z": 0.45
+    },
+    "scale": 3.6
+  },
+  "tpHandTransformByType": {
+    "*": {
+      "translation": {
+        "x": -0.85,
+        "y": -0.2,
+        "z": -0.48
+      },
+      "rotation": {
+        "x": 0,
+        "y": 0,
+        "z": -30
+      },
+      "scale": 1
+    }
+  }
+}
