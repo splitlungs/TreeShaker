@@ -7,5 +7,12 @@
   "item-treeshaker-meteoriciron": "Meteoric Iron Tree Shaker",
   "item-treeshaker-steel": "Steel Tree Shaker",
   "item-shakermotor": "Tree Shaker Motor",
-  "item-shakerhead": "Tree Shaker Head"
+  "item-shakerhead": "Tree Shaker Head",
+  "item-shakerhead-copper": "Copper Shaker Head",
+  "item-shakerhead-tinbronze": "Tin-Bronze Shaker Head",
+  "item-shakerhead-bismuthbronze": "Bismuth-Bronze Shaker Head",
+  "item-shakerhead-blackbronze": "Black-Bronze Shaker Head",
+  "item-shakerhead-iron": "Iron Shaker Head",
+  "item-shakerhead-meteoriciron": "Meteoric Iron Shaker Head",
+  "item-shakerhead-steel": "Steel Shaker Head"
 }

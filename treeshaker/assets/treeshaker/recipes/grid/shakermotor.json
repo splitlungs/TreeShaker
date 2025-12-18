@@ -1,15 +1,17 @@
 {
-  "ingredientPattern": "SGS,MAS,SSS",
+  "ingredientPattern": "SPS,MTG,SPS",
   "width": 3,
   "height": 3,
   "ingredients": {
-    "A": {
-      "type": "item",
-      "code": "game:jonasparts-cylinder02"
-    },
     "G": {
-      "type": "item",
-      "code": "game:jonasframes-gearbox01"
+      "type": "block",
+      "code": "game:glassslab-plain-*",
+      "quantity": 1
+    },
+    "P": {
+      "type": "block",
+      "code": "game:metal-parts",
+      "quantity": 1
     },
     "M": {
       "type": "item",
@@ -19,6 +21,10 @@
     "S": {
       "type": "block",
       "code": "game:metal-scraps"
+    },
+    "T": {
+      "type": "item",
+      "code": "game:gear-temporal"
     }
   },
   "output": {
