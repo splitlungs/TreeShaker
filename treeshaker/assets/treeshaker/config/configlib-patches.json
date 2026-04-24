@@ -1,0 +1,18 @@
+{
+  "version": 1.0,
+  "file": "TreeShaker_Config.json",
+  "patches": {},
+  "settings": [
+    {
+      "type": "separator",
+      "title": "TreeShakerSettings"
+    },
+    {
+      "code": "Debug",
+      "comment": "DebugComment",
+      "type": "bool",
+      "clientSide": false,
+      "default": false
+    }
+  ]
+}
