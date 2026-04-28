@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
@@ -17,7 +18,6 @@ namespace treeshaker
         private float lastHarvestSFX = 0;
         public TreeHarvestCollectibleBehavior(CollectibleObject collObj) : base(collObj)
         {
-            
         }
         public override void OnLoaded(ICoreAPI api)
         {
@@ -73,7 +73,7 @@ namespace treeshaker
             byEntity.AnimManager.StopAnimation("treeshaker-harvest1-fp");
             lastHarvestSFX = 0f;
             if (blockSel == null || slot?.Itemstack == null) return;
-
+            
             if (!(Api is ICoreServerAPI sapi)) return;
             // Claims Check
             EntityPlayer ep = byEntity as EntityPlayer;
@@ -94,10 +94,43 @@ namespace treeshaker
                 }
             }
             // Harvest if no claim violations
+            // List<BlockEntityFruitTreePart> parts = GetAllFruitTreeParts(blockSel.Position, Api.World);
+            // foreach (BlockEntityFruitTreePart p in parts)
+            //     DropAllStacks(p, player);
             HarvestAllFruitTreeParts(blockSel.Position, byEntity.Api.World, byEntity as IPlayer);
             sapi.Logger.Audit("[TreeShaker] {0} has harvested a tree at {1}.", player.PlayerName, blockSel.Position);
             // Damage the tool by 1
             slot.Itemstack.Collectible.DamageItem(byEntity.Api.World, byEntity, slot, 1);
+        }
+        private List<BlockEntityFruitTreePart> GetAllFruitTreeParts(BlockPos pos, IWorldAccessor world)
+        {
+            var results = new List<BlockEntityFruitTreePart>();
+
+            // Resolve the root stem from whatever part was clicked
+            if (world.BlockAccessor.GetBlockEntity(pos) is not BlockEntityFruitTreePart clickedPart) 
+                return results;
+
+            BlockPos rootPos = pos.AddCopy(
+                clickedPart.RootOff.X, 
+                clickedPart.RootOff.Y, 
+                clickedPart.RootOff.Z
+            );
+
+            // Scan for all parts that share this root
+            for (int dx = -radius; dx <= radius; dx++)
+            for (int dy = 0; dy <= height; dy++)
+            for (int dz = -radius; dz <= radius; dz++)
+            {
+                BlockPos bPos = rootPos.AddCopy(dx, dy, dz);
+                if (world.BlockAccessor.GetBlockEntity(pos) is not BlockEntityFruitTreePart part) continue;
+
+                BlockPos partRoot = pos.AddCopy(part.RootOff.X, part.RootOff.Y, part.RootOff.Z);
+                if (!partRoot.Equals(rootPos)) continue;
+
+                results.Add(part);
+            }
+
+            return results;
         }
         /// <summary>
         /// Drops all fruit in a given radius of a target Fruit Tree stem.
@@ -111,6 +144,9 @@ namespace treeshaker
             // bba.WalkBlocks(stemPos, stemPos, onBlock, false);
             // bba.Commit();
 
+            // if (world.BlockAccessor.GetBlockEntity(stemPos) is not BlockEntityFruitTreePart rootPart) return;
+            // BlockPos rootPos = stemPos.AddCopy(rootPart.RootOff);
+            // List<BlockEntityFruitTreePart> parts = new List<BlockEntityFruitTreePart>();
             // NEVER BELIEVE THE MACHINES
             for (int dx = -radius; dx <= radius; dx++)
             for (int dy = 0; dy <= height; dy++)
@@ -118,38 +154,81 @@ namespace treeshaker
             {
                 BlockPos pos = stemPos.AddCopy(dx, dy, dz);
                 if (world.BlockAccessor.GetBlockEntity(pos) is not BlockEntityFruitTreePart part) continue;
-
                 if (part.FoliageState != EnumFoliageState.Ripe) continue;
 
-                // Mark as harvested
-                part.FoliageState = EnumFoliageState.Plain;
-                part.MarkDirty(true);
+                // Check that this part's root stem matches the interacted stem
+                // BlockPos partRoot = pos.SubCopy(part.RootOff.X, part.RootOff.Y, part.RootOff.Z);
+                // if (!pos.Equals(stemPos)) continue;
+                // parts.Add(part);
+
+                // Get the actual block and drive harvest through it
+                // Block block = world.BlockAccessor.GetBlock(pos);
+                // if (block is not BlockFruitTreeBranch) continue;
+                // // Use the block's own interact path — this handles growth cycle reset + drops
+                // BlockSelection fakeSel = new BlockSelection
+                // {
+                //     Position = pos,
+                //     Face = BlockFacing.UP,
+                //     HitPosition = new Vec3d(0.5, 0.5, 0.5)
+                // };
+                // block.OnBlockInteractStop(6f, world, player, fakeSel);
+                // EnumHandHandling handHandling = EnumHandHandling.NotHandled;
+                // block.OnBlockInteractStart(world, player, fakeSel, ref handHandling);
 
                 // Get branch block from attribute
                 string branchAttr = part.Block?.Attributes?["branchBlock"]?.AsString();
                 if (string.IsNullOrEmpty(branchAttr)) continue;
-
                 AssetLocation branchCode = AssetLocation.Create(branchAttr, part.Block.Code.Domain);
                 if (world.GetBlock(branchCode) is not BlockFruitTreeBranch branchBlock) continue;
-
                 if (!branchBlock.TypeProps.TryGetValue(part.TreeType, out var fruitProps)) continue;
                 if (fruitProps?.FruitStacks == null) continue;
-
                 var gd = part.GrowthDir;
-
                 foreach (BlockDropItemStack fruitStack in fruitProps.FruitStacks)
                 {
                     ItemStack stack = fruitStack?.GetNextItemStack();
                     if (stack == null) continue;
-
                     if (player?.InventoryManager?.TryGiveItemstack(stack, true) != true)
                     {
                         world.SpawnItemEntity(stack, pos.ToVec3d().Add(0.5, 0.5, 0.5));
                     }
-
+                    // Mark as harvested
+                    part.SetHarvested(true);
+                    // part.FoliageState = EnumFoliageState.Plain;
+                    // part.MarkDirty(true);
                     if (fruitStack.LastDrop) break;
                 }
-                part.MarkDirty(true);
+            }
+        }
+        /// <summary>
+        /// Performatively drops all of the appropriate fruit for a given BEFruitTreePart
+        /// </summary>
+        /// <param name="part"></param>
+        /// <param name="player"></param>
+        public void DropAllStacks(BlockEntityFruitTreePart part, IPlayer player)
+        {
+            // Get branch block from attribute
+            string branchAttr = part.Block?.Attributes?["branchBlock"]?.AsString();
+            if (string.IsNullOrEmpty(branchAttr)) return;
+            AssetLocation branchCode = AssetLocation.Create(branchAttr, part.Block.Code.Domain);
+            if (Api.World.GetBlock(branchCode) is not BlockFruitTreeBranch branchBlock) return;
+            if (!branchBlock.TypeProps.TryGetValue(part.TreeType, out var fruitProps)) return;
+            if (fruitProps?.FruitStacks == null) return;
+            foreach (BlockDropItemStack fruitStack in fruitProps.FruitStacks)
+            {
+                ItemStack stack = fruitStack?.GetNextItemStack();
+                if (stack == null) continue;
+                if (player?.InventoryManager?.TryGiveItemstack(stack, true) != true)
+                {
+                    Api.World.SpawnItemEntity(stack, part.Pos.ToVec3d().Add(0.5, 0.5, 0.5));
+                }
+                // Mark as harvested
+                part.SetHarvested(true);
+                // part.FoliageState = EnumFoliageState.Plain;
+                // var field = typeof(BlockEntityFruitTreePart)
+                //     .GetField("harvested", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                // field?.SetValue(part, true);
+                // part.MarkDirty(true);
+                // if (fruitStack.LastDrop) break;
             }
         }
         public void onBlock(Block block, int i, int j, int k)
